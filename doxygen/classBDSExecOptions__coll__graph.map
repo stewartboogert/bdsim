@@ -1,0 +1,28 @@
+<map id="BDSExecOptions" name="BDSExecOptions">
+<area shape="rect" id="Node000001" title="Executable option processing for BDSIM." alt="" coords="375,5129,533,5435"/>
+<area shape="rect" id="Node000002" href="$classGMAD_1_1Options.html" title="Options class." alt="" coords="293,4841,442,5067"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="400,5066,412,5113,407,5114,395,5068"/>
+<area shape="rect" id="Node000003" href="$classGMAD_1_1Published.html" title=" " alt="" coords="7,2479,197,2799"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="74,2813,51,2978,29,3186,13,3425,9,3688,13,3826,22,3966,36,4107,57,4248,84,4388,119,4526,161,4661,212,4791,228,4820,248,4848,294,4895,290,4899,244,4851,224,4823,208,4793,156,4663,114,4528,79,4389,52,4249,31,4107,17,3966,8,3826,4,3688,8,3425,23,3185,45,2978,69,2812"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="255,311,413,376"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="297,378,250,426,229,456,213,488,165,619,125,754,92,892,67,1033,47,1174,33,1315,25,1454,20,1591,23,1853,36,2092,55,2298,76,2463,71,2464,50,2299,31,2092,17,1853,15,1591,19,1454,28,1314,42,1173,61,1032,87,891,120,753,160,617,208,486,225,453,246,423,293,374"/>
+<area shape="rect" id="Node000010" href="$classGMAD_1_1Published.html" title=" " alt="" coords="222,2487,449,2792"/>
+<area shape="poly" id="edge12_Node000010_Node000004" title=" " alt="" coords="337,376,338,2470,333,2470,331,376"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="499,135,577,200"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="499,179,448,196,422,209,399,226,371,259,352,297,347,294,367,256,395,222,419,205,446,191,497,174"/>
+<area shape="rect" id="Node000007" href="$classGMAD_1_1OptionsBase.html" title="Basic options class independent of Geant4." alt="" coords="473,1169,726,4109"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="511,202,491,231,475,264,466,307,467,342,472,378,475,424,488,786,505,1153,500,1153,483,786,470,424,466,378,461,342,461,306,470,262,486,228,507,199"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="638,311,817,376"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="574,198,683,297,679,301,571,202"/>
+<area shape="rect" id="Node000011" href="$classGMAD_1_1BeamBase.html" title="Options for a beam distribution." alt="" coords="750,487,979,4792"/>
+<area shape="poly" id="edge14_Node000011_Node000005" title=" " alt="" coords="578,165,636,170,706,184,742,196,775,212,805,234,831,261,905,374,967,494,1017,618,1056,748,1085,880,1105,1015,1116,1151,1120,1287,1117,1422,1109,1555,1096,1686,1078,1812,1035,2048,986,2256,981,2255,1030,2047,1073,1811,1090,1685,1104,1555,1112,1422,1115,1287,1111,1151,1099,1015,1080,881,1051,749,1012,620,962,496,901,377,827,264,802,238,772,217,740,201,705,189,636,175,578,171"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="473,5,603,85"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="541,99,541,134,535,134,535,99"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="597,4124,574,4294,544,4464,508,4631,463,4793,443,4842,438,4840,458,4791,502,4629,539,4463,568,4293,591,4123"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="701,378,677,411,659,449,611,619,573,795,545,973,526,1153,521,1153,540,973,568,794,606,618,654,447,673,408,697,374"/>
+<area shape="poly" id="edge15_Node000011_Node000008" title=" " alt="" coords="733,376,741,486,752,652,746,653,735,487,727,376"/>
+<area shape="rect" id="Node000009" href="$classGMAD_1_1Beam.html" title="Beam class." alt="" coords="466,4841,615,5067"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="514,5068,501,5114,496,5113,508,5066"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="325,2807,317,2967,310,3170,308,3406,314,3667,330,3944,358,4229,378,4373,402,4515,430,4655,463,4791,481,4840,476,4842,458,4793,425,4656,396,4516,372,4373,353,4230,324,3944,309,3667,303,3406,305,3170,312,2967,320,2806"/>
+<area shape="poly" id="edge13_Node000009_Node000011" title=" " alt="" coords="746,4781,740,4793,716,4831,685,4864,651,4892,617,4915,614,4911,648,4888,681,4860,712,4827,736,4791,742,4779"/>
+</map>
