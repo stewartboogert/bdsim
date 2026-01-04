@@ -86,10 +86,10 @@ def generate(dirToScan):
         dd['eventDurationWallMax'].append(es['durationWall'].max())
 
         # run duration CPU
-        dd['runDurationCPU'].append(r['durationCPU'])
+        dd['runDurationCPU'].append(r['durationCPU'][0])
 
         # run duration Wall
-        dd['runDurationWall'].append(r['durationWall'])
+        dd['runDurationWall'].append(r['durationWall'][0])
 
 
     return pandas.DataFrame(dd)
