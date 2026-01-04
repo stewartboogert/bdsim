@@ -12,6 +12,7 @@ def _generate_test_outputs(dirToScan) :
 def generate(dirToScan):
     files = _generate_test_outputs(dirToScan)
     filesSkipped = []
+    filesNoRun = []
 
     dd = {}
     dd['index'] = []
@@ -86,11 +87,18 @@ def generate(dirToScan):
         dd['eventDurationWallMax'].append(es['durationWall'].max())
 
         # run duration CPU
-        dd['runDurationCPU'].append(r['durationCPU'][0])
+        try :
+            dd['runDurationCPU'].append(r['durationCPU'][0])
+        except :
+            print(str(f))
+            dd['runDurationCPU'].append(0)
 
         # run duration Wall
-        dd['runDurationWall'].append(r['durationWall'][0])
-
+        try :
+            dd['runDurationWall'].append(r['durationWall'][0])
+        except :
+            print(str(f))
+            dd['runDurationWall'].append(0)
 
     return pandas.DataFrame(dd)
 
