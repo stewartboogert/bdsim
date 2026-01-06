@@ -1,40 +1,30 @@
----
+# Language
 Language: Cpp
-Cpp11BracedListStyle: true
-ColumnLimit: 100
+Standard: Cpp11
+
+# Indentation and tabs
+IndentWidth:     2
+TabWidth:        2
+UseTab:          Never
+
+# Braces
 BasedOnStyle: GNU
-BinPackParameters: false
-BinPackArguments: false
-PackConstructorInitializers: Never
-BreakConstructorInitializers: AfterColon
-AllowShortIfStatementsOnASingleLine: true
 
-AlwaysBreakAfterDefinitionReturnType: None
-AlwaysBreakAfterReturnType: None
+BraceWrapping:
+  AfterControlStatement: true
+  BeforeElse: true
+  AfterFunction: true
+  AfterClass: false
+  AfterNamespace: false
 
-AlignConsecutiveDeclarations: true
-AlignConsecutiveAssignments: true
-AlignTrailingComments: true
-AlignAfterOpenBracket: Align
+# Consecutive statements
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignConsecutiveMacros: false
 
-SpaceBeforeSquareBrackets: false
-SpaceInEmptyBlock: false
-SpacesInContainerLiterals: false
+# braces
+BreakBeforeBraces: Allman
 
-SpaceBeforeParens: Custom
-SpaceBeforeParensOptions:
-  AfterControlStatements: true
-  AfterFunctionDefinitionName: false
-  
-SpacesInParens: Custom
-SpacesInParensOptions:
-  InEmptyParentheses: false
-  Other: false
-
-
-AllowShortBlocksOnASingleLine: true
-
+# Reference and pointer alignment
 PointerAlignment: Left
 ReferenceAlignment: Left
-...
-
