@@ -124,13 +124,15 @@ along with BDSIM.  If not, see <http://www.gnu.org/licenses/>.
 #include "BDSPhysicsChannelling.hh"
 #include "BDSPhysicsRadioactivation.hh"
 #include "G4EmDNAPhysics.hh"
-#include "G4EmDNAPhysics_option1.hh"
 #include "G4EmDNAPhysics_option2.hh"
-#include "G4EmDNAPhysics_option3.hh"
 #include "G4EmDNAPhysics_option4.hh"
-#include "G4EmDNAPhysics_option5.hh"
 #include "G4EmDNAPhysics_option6.hh"
+#if G4VERSION_NUMBER <= 1142 && G4VERSION_REFERENCE_TAG < 0
+#include "G4EmDNAPhysics_option1.hh"
+#include "G4EmDNAPhysics_option3.hh"
+#include "G4EmDNAPhysics_option5.hh"
 #include "G4EmDNAPhysics_option7.hh"
+#endif
 #include "G4HadronPhysicsShieldingLEND.hh"
 #endif
 
@@ -1239,20 +1241,23 @@ void BDSModularPhysicsList::DNA()
     {
       if (temporaryName == "dna")
         {constructors.push_back(new G4EmDNAPhysics());}
-      else if (temporaryName == "dna_1")
-        {constructors.push_back(new G4EmDNAPhysics_option1());}
       else if (temporaryName == "dna_2")
         {constructors.push_back(new G4EmDNAPhysics_option2());}
-      else if (temporaryName == "dna_3")
-        {constructors.push_back(new G4EmDNAPhysics_option3());}
       else if (temporaryName == "dna_4")
         {constructors.push_back(new G4EmDNAPhysics_option4());}
-      else if (temporaryName == "dna_5")
-        {constructors.push_back(new G4EmDNAPhysics_option5());}
       else if (temporaryName == "dna_6")
         {constructors.push_back(new G4EmDNAPhysics_option6());}
+#if G4VERSON_NUMBER <= 1142 && G4VERSION_REFERENCE_TAG < 0
+    else if (temporaryName == "dna_1")
+        {constructors.push_back(new G4EmDNAPhysics_option1());}
+      else if (temporaryName == "dna_3")
+        {constructors.push_back(new G4EmDNAPhysics_option3());}
+      else if (temporaryName == "dna_5")
+      {constructors.push_back(new G4EmDNAPhysics_option5());}
       else if (temporaryName == "dna_7")
         {constructors.push_back(new G4EmDNAPhysics_option7());}
+#endif
+
       physicsActivated["dna"] = true;
     }
 }
