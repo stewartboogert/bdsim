@@ -150,6 +150,12 @@ public:
   /// Provide a physics list that will be used inplace of the BDSIM generate one.
   void RegisterUserPhysicsList(G4VModularPhysicsList* userPhysicsListIn) {userPhysicsList = userPhysicsListIn;}
   G4VModularPhysicsList* UserPhysicsList() const {return userPhysicsList;} ///< Access user physics list.
+
+  /// Register a custom user beam line element by the type name you'd like it to have
+  /// and the (user-provided) constructor that can construct it. Must be called before
+  /// Initialise(). Same as BDSIM::RegisterUserComponent.
+  void RegisterUserComponent(const G4String& componentTypeName,
+                             BDSComponentConstructor* componentConstructor);
   
 private:
   /// The main function where everything is constructed.
@@ -177,6 +183,7 @@ private:
   std::map<std::string, int>        nameToElementIndex;
   std::map<int, int>                linkIDToBeamlineIndex;
   int                               currentElementIndex; ///< Element to track in.
+  BDSComponentFactoryUser*          userComponentFactory; ///< Optional user registered component factory.
   G4VModularPhysicsList*            userPhysicsList;     ///< Optional user registered physics list.
 };
 

@@ -49,6 +49,7 @@ along with BDSIM.  If not, see <http://www.gnu.org/licenses/>.
 #include "G4EmStandardPhysics_option4.hh"
 #include "G4EmStandardPhysicsSS.hh"
 #include "G4DynamicParticle.hh"
+#include "G4FastSimulationPhysics.hh"
 #include "G4Gamma.hh"
 #include "G4GenericBiasingPhysics.hh"
 #include "G4GenericIon.hh"
@@ -76,6 +77,7 @@ along with BDSIM.  If not, see <http://www.gnu.org/licenses/>.
 #include "G4ProcessVector.hh"
 #include "G4ProductionCutsTable.hh"
 #include "G4Proton.hh"
+#include "G4StepLimiterPhysics.hh"
 #include "G4String.hh"
 #include "G4UImanager.hh"
 #include "G4VDecayChannel.hh"
@@ -178,9 +180,11 @@ G4VModularPhysicsList* BDS::BuildPhysics(const G4String& physicsList, G4int verb
           G4bool regular = BDS::StrContains(physicsListNameLower, "regular");
           G4bool em4     = BDS::StrContains(physicsListNameLower, "em4");
           G4bool emss    = BDS::StrContains(physicsListNameLower, "emss");
+          G4bool fastsim = BDS::StrContains(physicsListNameLower, "fastsim");
+          G4bool steplim = BDS::StrContains(physicsListNameLower, "steplim");
           // we don't assign 'result' variable or proceed as that would result in the
           // range cuts being set for a complete physics list that we wouldn't use
-          auto r = BDS::ChannellingPhysicsComplete(useEMD, regular, em4, emss);
+          auto r = BDS::ChannellingPhysicsComplete(useEMD, regular, em4, emss, fastsim, steplim);
           r->SetVerboseLevel(verbosity);
           return r;
 #else
@@ -567,7 +571,9 @@ void BDS::PrintDefinedParticles()
 G4VModularPhysicsList* BDS::ChannellingPhysicsComplete(G4bool useEMD,
                                                        G4bool regular,
                                                        G4bool em4,
-                                                       G4bool emss)
+                                                       G4bool emss,
+                                                       G4bool fastsim,
+                                                       G4bool steplim)
 {
   G4VModularPhysicsList* physlist = new FTFP_BERT();
   physlist->RegisterPhysics(new G4IonElasticPhysics()); // not included by default in FTFP_BERT
@@ -585,6 +591,27 @@ G4VModularPhysicsList* BDS::ChannellingPhysicsComplete(G4bool useEMD,
   else if (emss)
     {
       physlist->ReplacePhysics(new G4EmStandardPhysicsSS());
+    }
+
+  // optional fast simulation, needed for the crystal channelling model
+  // (G4ChannelingFastSimModel) of the "crystaldeflector" user component
+  if (fastsim)
+    {
+      G4cout << "Adding fast simulation physics" << G4endl;
+      G4FastSimulationPhysics* fastSimulationPhysics = new G4FastSimulationPhysics();
+      fastSimulationPhysics->BeVerbose();
+      fastSimulationPhysics->ActivateFastSimulation("e-");
+      fastSimulationPhysics->ActivateFastSimulation("e+");
+      fastSimulationPhysics->ActivateFastSimulation("proton");
+      fastSimulationPhysics->ActivateFastSimulation("GenericIon"); // all ions
+      physlist->RegisterPhysics(fastSimulationPhysics);
+    }
+
+  // optional step limiter
+  if (steplim)
+    {
+      G4cout << "Adding step limiter" << G4endl;
+      physlist->RegisterPhysics(new G4StepLimiterPhysics());
     }
 
   // optional electromagnetic dissociation that isn't in FTFP_BERT by default

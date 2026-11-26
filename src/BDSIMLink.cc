@@ -68,6 +68,7 @@ along with BDSIM.  If not, see <http://www.gnu.org/licenses/>.
 #include "BDSTemporaryFiles.hh"
 #include "BDSUtilities.hh"
 #include "BDSVisManager.hh"
+#include "BDSWarning.hh"
 
 #include <map>
 #include <set>
@@ -89,6 +90,7 @@ BDSIMLink::BDSIMLink(BDSBunch* bunchIn,
   construction(nullptr),
   runAction(nullptr),
   currentElementIndex(0),
+  userComponentFactory(nullptr),
   userPhysicsList(nullptr)
 {
   if(!bdsBunch) {
@@ -113,6 +115,7 @@ BDSIMLink::BDSIMLink(int argc, char** argv,
   construction(nullptr),
   runAction(nullptr),
   currentElementIndex(0),
+  userComponentFactory(nullptr),
   userPhysicsList(nullptr)
 {
   initialisationResult = Initialise();
@@ -195,7 +198,7 @@ int BDSIMLink::Initialise(double minimumKineticEnergy,
   runManager = new BDSLinkRunManager();
 
   /// Register the geometry and parallel world construction methods with run manager.
-  construction = new BDSLinkDetectorConstruction();
+  construction = new BDSLinkDetectorConstruction(userComponentFactory);
 
   /// Here the geometry isn't actually constructed - this is called by the runManager->Initialize()
   auto parallelWorldsRequiringPhysics = BDS::ConstructAndRegisterParallelWorlds(construction, true, false);
@@ -475,7 +478,7 @@ const BDSLinkComponent* BDSIMLink::GetLinkComponent(int linkID) const
   const BDSBeamline* bl = construction->LinkBeamline();
   if (!bl)
     {return nullptr;}
-  if (linkID > (int)bl->size())
+  if (linkID < 0 || linkID >= (int)bl->size())
     {return nullptr;}
   const auto rawAccComponent = bl->at(linkID)->GetAcceleratorComponent();
   const auto linkComponent = dynamic_cast<const BDSLinkComponent*>(rawAccComponent);
@@ -670,4 +673,16 @@ void BDSIMLink::SetCurrentMaximumExternalParticleID(int currentMaximumExternalPa
 {
   if (runAction)
     {runAction->SetMaximumExternalParticleID(currentMaximumExternalParticleID);}
+}
+
+void BDSIMLink::RegisterUserComponent(const G4String& componentTypeName,
+                                      BDSComponentConstructor* componentConstructor)
+{
+  if (initialised)
+    {BDS::Warning(__METHOD_NAME__, "BDSIM kernel already initialised - this component will not be available");}
+  if (!userComponentFactory)
+    {userComponentFactory = new BDSComponentFactoryUser();}
+
+  userComponentFactory->RegisterComponent(componentTypeName,
+                                          componentConstructor);
 }

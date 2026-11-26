@@ -16,9 +16,9 @@ You should have received a copy of the GNU General Public License
 along with BDSIM.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "BDSPhysicsEMDissociation.hh"
+#include "G4Fix_EMDissociationCrossSection.hh"
 
 #include "G4EMDissociation.hh"
-#include "G4EMDissociationCrossSection.hh"
 #include "G4Gamma.hh"
 #include "G4GenericIon.hh"
 #include "G4HadronInelasticProcess.hh"
@@ -53,7 +53,9 @@ void BDSPhysicsEMDissociation::ConstructProcess()
   inelProcIon->SetProcessSubType(G4HadronicProcessType::fEMDissociation);
 #endif
 
-  G4EMDissociationCrossSection* crossSectionData = new G4EMDissociationCrossSection();
+  // G4FIX: G4EMDissociationCrossSection returns NaN for Lorentz factors above ~1000
+  // (see G4Fix_EMDissociationCrossSection) - use it again once fixed in Geant4
+  G4EMDissociationCrossSection* crossSectionData = new G4Fix_EMDissociationCrossSection();
   inelProcIon->AddDataSet(crossSectionData);
 
   G4EMDissociation* emdModel = new G4EMDissociation();

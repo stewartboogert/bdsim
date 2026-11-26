@@ -126,7 +126,9 @@ namespace BDS
   G4VModularPhysicsList* ChannellingPhysicsComplete(G4bool useEMD  = false,
 						    G4bool regular = false,
 						    G4bool em4     = false,
-						    G4bool emss    = false);
+						    G4bool emss    = false,
+						    G4bool fastsim = false,
+						    G4bool steplim = false);
 #endif
 
   /// Set the range cuts on a physics list. This is split into a separate function to allow it

@@ -31,6 +31,7 @@ along with BDSIM.  If not, see <http://www.gnu.org/licenses/>.
 #include "BDSIMLink.hh"
 #include "BDSParticleDefinition.hh"
 #include "BDSException.hh"
+#include "CrystalDeflectorConstructor.hh"
 
 
 BDSLinkTrackerInterface* BDSLinkTrackerInterface::singleton = nullptr;
@@ -137,6 +138,9 @@ BDSLinkTrackerInterface::BDSLinkTrackerInterface(std::string bdsimConfigFileIn,
   for (auto& arg : bdsim_args)
     {c_args.push_back(const_cast<char*>(arg.c_str()));}
 
+  // crystal channelling deflector (G4ChannelingFastSimModel), as user component
+  linkBDSIM->RegisterUserComponent("crystaldeflector", new CrystalDeflectorConstructor());
+
   // initialise link object
   linkBDSIM->Initialise((int)c_args.size(),
                         c_args.data(),
@@ -195,6 +199,9 @@ BDSLinkTrackerInterface::BDSLinkTrackerInterface(BDSParser *parserIn,
   std::vector<char*> c_args;
   for (auto& arg : bdsim_args)
   {c_args.push_back(const_cast<char*>(arg.c_str()));}
+
+  // crystal channelling deflector (G4ChannelingFastSimModel), as user component
+  linkBDSIM->RegisterUserComponent("crystaldeflector", new CrystalDeflectorConstructor());
 
   // initialise link object
   linkBDSIM->Initialise((int)c_args.size(),

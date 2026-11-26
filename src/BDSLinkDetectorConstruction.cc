@@ -61,7 +61,8 @@ along with BDSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 class BDSParticleDefinition;
 
-BDSLinkDetectorConstruction::BDSLinkDetectorConstruction():
+BDSLinkDetectorConstruction::BDSLinkDetectorConstruction(BDSComponentFactoryUser* userComponentFactoryIn):
+  userComponentFactory(userComponentFactoryIn),
   worldSolid(nullptr),
   worldPV(nullptr),
   linkBeamline(nullptr),
@@ -92,7 +93,7 @@ G4VPhysicalVolume* BDSLinkDetectorConstruction::Construct()
 {
   BDSGlobalConstants* globalConstants = BDSGlobalConstants::Instance();
 
-  auto componentFactory = std::unique_ptr<BDSComponentFactory>(new BDSComponentFactory(nullptr, false));
+  auto componentFactory = std::unique_ptr<BDSComponentFactory>(new BDSComponentFactory(userComponentFactory, false));
   auto beamline = BDSParser::Instance()->GetBeamline();
 
   std::vector<BDSLinkOpaqueBox*> opaqueBoxes = {};
@@ -197,7 +198,7 @@ G4int BDSLinkDetectorConstruction::AddLinkCollimatorJaw(const std::string& colli
                                                         G4double crystalAngle,
                                                         G4bool   /*sampleIn*/)
 {
-  auto componentFactory = std::unique_ptr<BDSComponentFactory>(new BDSComponentFactory(nullptr, false));
+  auto componentFactory = std::unique_ptr<BDSComponentFactory>(new BDSComponentFactory(userComponentFactory, false));
 
   if (!integral)
     {
@@ -359,7 +360,7 @@ G4int BDSLinkDetectorConstruction::AddLinkCollimatorTipJaw(const std::string& co
                                                           G4bool   buildLeftJaw,
                                                           G4bool   buildRightJaw)
 {
-    auto componentFactory = std::unique_ptr<BDSComponentFactory>(new BDSComponentFactory(nullptr, false));
+    auto componentFactory = std::unique_ptr<BDSComponentFactory>(new BDSComponentFactory(userComponentFactory, false));
 
     if (!integral)
     {
@@ -441,7 +442,7 @@ G4int BDSLinkDetectorConstruction::AddLinkCollimatorTipJaw(const std::string& co
 }
 
 G4int BDSLinkDetectorConstruction::AddLinkElement(GMAD::Element el) {
-  auto componentFactory = std::unique_ptr<BDSComponentFactory>(new BDSComponentFactory(nullptr, false));
+  auto componentFactory = std::unique_ptr<BDSComponentFactory>(new BDSComponentFactory(userComponentFactory, false));
 
   if (!integral)
   {
